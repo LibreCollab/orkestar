@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -41,7 +42,8 @@ func TestAdapterRejectsManagedMode(t *testing.T) {
 func TestAdapterAcceptsResume(t *testing.T) {
 	t.Parallel()
 
-	adapter := claude.New(fixtureExecutable(t))
+	executable := fixtureExecutable(t)
+	adapter := claude.New(executable)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	session, err := adapter.Launch(ctx, agent.LaunchOptions{Mode: agent.ModeInteractive, ResumeSessionID: "prior"})
@@ -52,7 +54,44 @@ func TestAdapterAcceptsResume(t *testing.T) {
 	if session.NativeSessionID() != "prior" {
 		t.Fatal("resume identity not retained")
 	}
+	if args := fixtureArguments(t, executable); len(args) != 2 || args[0] != "--resume" || args[1] != "prior" {
+		t.Fatalf("unexpected launch arguments: %#v", args)
+	}
+}
 
+// An opening prompt must reach Claude Code as its initial prompt, not be
+// typed at the terminal later: in a directory it has not been trusted in,
+// the CLI shows a trust dialog first, and a late Enter there selects the
+// default answer, which is to exit. The prompt also carries a separator so
+// one that begins with a dash does not parse as a flag.
+func TestAdapterTakesTheOpeningPromptAtLaunch(t *testing.T) {
+	t.Parallel()
+
+	executable := fixtureExecutable(t)
+	adapter := claude.New(executable)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	session, err := adapter.Launch(ctx, agent.LaunchOptions{
+		Mode:          agent.ModeInteractive,
+		Directory:     t.TempDir(),
+		OpeningPrompt: "-fix the flaky test",
+	})
+	if err != nil {
+		t.Fatalf("launch: %v", err)
+	}
+	defer session.Close()
+
+	promptSession, ok := session.(agent.OpeningPromptSession)
+	if !ok {
+		t.Fatal("expected the interactive session to report on the opening prompt")
+	}
+	if !promptSession.OpeningPromptHandled() {
+		t.Fatal("a launch with an opening prompt should report it submitted")
+	}
+	if args := fixtureArguments(t, executable); len(args) != 2 || args[0] != "--" || args[1] != "-fix the flaky test" {
+		t.Fatalf("unexpected launch arguments: %#v", args)
+	}
 }
 
 func TestAdapterLaunchPromptAndInterrupt(t *testing.T) {
@@ -118,15 +157,40 @@ func waitForState(t *testing.T, session agent.Session, want agent.State) {
 
 // fixtureExecutable writes a small shell script that behaves enough like an
 // interactive CLI (reads stdin, ignores it, exits when its PTY closes) to
-// exercise the adapter without depending on a real Claude Code install.
+// exercise the adapter without depending on a real Claude Code install. It
+// records its own arguments to "<path>.args" so a test can check how the
+// adapter invoked it.
 func fixtureExecutable(t *testing.T) string {
 	t.Helper()
 
 	directory := t.TempDir()
 	path := filepath.Join(directory, "claude")
-	script := "#!/bin/sh\ncat >/dev/null\n"
+	script := "#!/bin/sh\nprintf '%s\\n' \"$@\" > \"$0.args\"\ncat >/dev/null\n"
 	if err := os.WriteFile(path, []byte(script), 0o755); err != nil {
 		t.Fatalf("write fixture executable: %v", err)
 	}
 	return path
+}
+
+// fixtureArguments returns the arguments the fixture executable was launched
+// with, waiting briefly because the script writes them as it starts.
+func fixtureArguments(t *testing.T, executable string) []string {
+	t.Helper()
+
+	path := executable + ".args"
+	deadline := time.Now().Add(3 * time.Second)
+	for {
+		data, err := os.ReadFile(path)
+		if err == nil {
+			lines := strings.Split(strings.TrimSuffix(string(data), "\n"), "\n")
+			if len(lines) == 1 && lines[0] == "" {
+				return nil
+			}
+			return lines
+		}
+		if time.Now().After(deadline) {
+			t.Fatalf("fixture executable never recorded its arguments: %v", err)
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
 }

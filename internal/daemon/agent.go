@@ -456,7 +456,7 @@ func (s *Server) launch(ctx context.Context, params launchParams) (Agent, error)
 	s.agents[id] = starting
 	s.hookTokens[id] = token
 	s.mu.Unlock()
-	session, err := adapter.Launch(ctx, agent.LaunchOptions{Mode: mode, Directory: directory, Columns: params.Columns, Rows: params.Rows, ResumeSessionID: params.ResumeSessionID, HookCommand: hookCommand, Environment: env})
+	session, err := adapter.Launch(ctx, agent.LaunchOptions{Mode: mode, Directory: directory, Columns: params.Columns, Rows: params.Rows, ResumeSessionID: params.ResumeSessionID, HookCommand: hookCommand, Environment: env, OpeningPrompt: params.Prompt})
 	if err != nil {
 		s.mu.Lock()
 		delete(s.agents, id)
@@ -540,7 +540,10 @@ func (s *Server) launch(ctx context.Context, params launchParams) (Agent, error)
 		_, _ = s.tasks.Assign(params.TaskID, id)
 	}
 
-	if params.Prompt != "" {
+	// An adapter that already submitted the prompt at launch — which is how
+	// OpenCode's TUI gets its first message, since it has no session to hook
+	// before one is sent — must not be prompted a second time.
+	if params.Prompt != "" && !launchPromptHandled(session) {
 		// Only a PTY-backed session has an interface that has to come up
 		// before it can be typed at.
 		_, interactive := session.(agent.ProcessSession)
@@ -932,6 +935,13 @@ type agentConnection struct {
 	}
 	Encoder interface{ Encode(any) error }
 	Request ipc.Request
+}
+
+// launchPromptHandled reports whether the adapter already submitted the
+// launch's opening prompt itself, so the daemon's own delivery is skipped.
+func launchPromptHandled(session agent.Session) bool {
+	handled, ok := session.(agent.OpeningPromptSession)
+	return ok && handled.OpeningPromptHandled()
 }
 
 // openingPromptTimeout bounds the wait for a session to say it started. Hooks

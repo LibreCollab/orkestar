@@ -446,6 +446,35 @@ func TestOpeningPromptIsSentOnlyOnce(t *testing.T) {
 	}
 }
 
+// An adapter that submits the opening prompt itself — which is how
+// OpenCode's TUI must take it, since its hooks cannot fire before a message
+// exists — must not be prompted again once the session signals it started.
+func TestAPromptTakenAtLaunchIsNotDeliveredAgain(t *testing.T) {
+	t.Parallel()
+
+	adapter := newControllableAdapter("fake-agent")
+	adapter.takesOpeningPrompt = true
+	fixture := newTaskAgentFixtureWith(t, adapter)
+
+	var launched daemon.Agent
+	fixture.mustCall(t, "agent.launch", map[string]any{
+		"workspace_id": fixture.workspace.ID, "adapter": "fake-agent", "prompt": "do the thing",
+	}, &launched)
+	session := fixture.adapter.launched(t)
+
+	if session.options.OpeningPrompt != "do the thing" {
+		t.Fatalf("the launch was handed %q as the opening prompt", session.options.OpeningPrompt)
+	}
+	// Even after the session says it is up, nothing more is typed: the
+	// prompt was part of the launch.
+	fixture.hook(t, session, launched.ID, "SessionStart")
+	select {
+	case text := <-session.prompts:
+		t.Fatalf("prompted %q although the launch took it", text)
+	case <-time.After(300 * time.Millisecond):
+	}
+}
+
 // A launch with no work to hand over must not prompt at all.
 func TestLaunchWithoutAPromptSaysNothing(t *testing.T) {
 	t.Parallel()

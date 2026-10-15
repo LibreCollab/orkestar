@@ -91,6 +91,27 @@ func TestLaunchPromptInterruptAndExit(t *testing.T) {
 	waitForState(t, session, agent.StateStopped)
 }
 
+// A session must not claim an opening prompt that nobody submitted; marking
+// it is how an adapter says the launch already did.
+func TestOpeningPromptHandledIsOptIn(t *testing.T) {
+	t.Parallel()
+
+	session, err := ptysession.Launch("fixture", fixtureExecutable(t), agent.LaunchOptions{Directory: t.TempDir()})
+	if err != nil {
+		t.Fatalf("launch: %v", err)
+	}
+	defer session.Close()
+
+	var promptSession agent.OpeningPromptSession = session
+	if promptSession.OpeningPromptHandled() {
+		t.Fatal("a fresh session claims an opening prompt was submitted")
+	}
+	session.MarkOpeningPromptHandled()
+	if !promptSession.OpeningPromptHandled() {
+		t.Fatal("a marked session does not report the opening prompt submitted")
+	}
+}
+
 func TestCloseIsIdempotentAndClosesEvents(t *testing.T) {
 	t.Parallel()
 

@@ -1,6 +1,9 @@
 // Package opencode implements the OpenCode agent adapter. Interactive mode
 // launches the installed `opencode` executable inside a PTY, the same way
-// the claude adapter does. Managed mode instead talks to an already-running
+// the claude adapter does. Unlike the other interactive CLIs, the TUI only
+// creates a session once a message is submitted, so an opening prompt is
+// passed to the command line at launch rather than typed into the terminal
+// after a startup signal. Managed mode instead talks to an already-running
 // OpenCode HTTP server (`opencode serve`, default http://localhost:4096)
 // and returns structured replies, which interactive mode cannot. Structured
 // lifecycle events from the server's SSE stream are not implemented yet.
@@ -68,9 +71,20 @@ func (a *Adapter) Launch(ctx context.Context, options agent.LaunchOptions) (agen
 		if options.ResumeSessionID != "" {
 			options.Arguments = append(options.Arguments, "--session", options.ResumeSessionID)
 		}
+		// The OpenCode TUI creates its session only when a message is
+		// submitted, so its lifecycle hooks cannot confirm it is up before
+		// the opening prompt. Hand the prompt to the CLI instead, which
+		// creates the session as it boots; the daemon then skips its own
+		// delivery.
+		if options.OpeningPrompt != "" {
+			options.Arguments = append(options.Arguments, "--prompt="+options.OpeningPrompt)
+		}
 		session, err := ptysession.Launch("opencode", a.executable, options)
 		if err != nil {
 			return nil, fmt.Errorf("opencode adapter: %w", err)
+		}
+		if options.OpeningPrompt != "" {
+			session.MarkOpeningPromptHandled()
 		}
 		return session, nil
 	}

@@ -56,3 +56,51 @@ cat >/dev/null
 		t.Fatal("unsupported mode accepted")
 	}
 }
+
+// An opening prompt must reach Codex as its initial prompt, not be typed at
+// the terminal later: in an untrusted directory the CLI shows a trust dialog
+// first, and a late Enter there would answer it by accident.
+func TestCodexLaunchTakesTheOpeningPrompt(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "codex")
+	capture := filepath.Join(dir, "args")
+	script := `#!/bin/sh
+printf '%s\n' "$@" > "$ARG_CAPTURE"
+cat >/dev/null
+`
+	if err := os.WriteFile(path, []byte(script), 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	adapter := codex.New(path)
+	session, err := adapter.Launch(context.Background(), agent.LaunchOptions{
+		Mode: agent.ModeInteractive, OpeningPrompt: "-fix the flaky test",
+		Environment: append(os.Environ(), "ARG_CAPTURE="+capture),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer session.Close()
+
+	promptSession, ok := session.(agent.OpeningPromptSession)
+	if !ok {
+		t.Fatal("expected session to report on the opening prompt")
+	}
+	if !promptSession.OpeningPromptHandled() {
+		t.Fatal("a launch with an opening prompt should report it submitted")
+	}
+	deadline := time.Now().Add(5 * time.Second)
+	for {
+		b, _ := os.ReadFile(capture)
+		if len(b) > 0 {
+			if !strings.Contains(string(b), "--\n-fix the flaky test") {
+				t.Fatalf("the prompt was not passed as a positional argument: %s", b)
+			}
+			break
+		}
+		if time.Now().After(deadline) {
+			t.Fatal("argv not captured")
+		}
+		time.Sleep(time.Millisecond)
+	}
+}

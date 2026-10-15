@@ -165,6 +165,16 @@ buffer/subscriber/input machinery used by plain terminal sessions
 ordinary `terminal.attach` — there is one terminal-attach mechanism, not one
 for plain commands and a different one for agents.
 
+A launch that carries work hands the opening prompt to the agent as its first
+turn. Where the CLI accepts an initial prompt on the command line, the adapter
+passes it there and reports it handled through `agent.OpeningPromptSession`,
+so the daemon does not deliver it again: the OpenCode TUI has no session — and
+therefore no hook — before a message is submitted, and Claude Code and Codex
+show a directory trust dialog in a fresh checkout, where a prompt typed at the
+terminal after a timeout would answer the dialog by accident. For an adapter
+with no such argument, the daemon holds the prompt until the session signals
+it is up and then types it in, since a TUI cannot be typed at before it draws.
+
 ## MCP and game engines
 
 Orkestar eventually has two MCP roles:

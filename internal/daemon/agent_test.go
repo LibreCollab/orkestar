@@ -34,6 +34,10 @@ type controllableAdapter struct {
 	failFrom *atomic.Int64
 	// detections, when set, makes the adapter an agent.Detector.
 	detections []agent.Detection
+	// takesOpeningPrompt, when set, makes each session claim the daemon's
+	// opening prompt as submitted at launch, the way an adapter with no
+	// startup signal has to take it.
+	takesOpeningPrompt bool
 }
 
 // Detections lets a test adapter infer lifecycle from pane text.
@@ -98,6 +102,7 @@ func (a *controllableAdapter) Launch(ctx context.Context, options agent.LaunchOp
 		// agent was started and reach the hook token it was handed.
 		options: options,
 	}
+	var result agent.Session = session
 	if a.executable != "" {
 		process, err := pty.Start(pty.StartOptions{
 			Command: a.executable, Directory: options.Directory, Columns: 80, Rows: 24,
@@ -106,14 +111,15 @@ func (a *controllableAdapter) Launch(ctx context.Context, options agent.LaunchOp
 			return nil, err
 		}
 		session.process = process
-		a.sessions <- session
 		// Only this wrapper satisfies agent.ProcessSession. Declaring Process
 		// on controllableSession itself would make every session look
 		// PTY-backed, since Go decides that statically.
-		return &ptyControllableSession{session}, nil
+		result = &ptyControllableSession{session}
+	} else if a.takesOpeningPrompt {
+		result = &launchPromptControllableSession{controllableSession: session, handled: options.OpeningPrompt != ""}
 	}
 	a.sessions <- session
-	return session, nil
+	return result, nil
 }
 
 // launched returns the session from the most recent Launch, waiting briefly
@@ -147,6 +153,18 @@ type controllableSession struct {
 type ptyControllableSession struct{ *controllableSession }
 
 func (s *ptyControllableSession) Process() *pty.Process { return s.process }
+
+// launchPromptControllableSession is a controllable session whose Launch
+// submitted the opening prompt, the way an adapter with no startup signal
+// has to take it. Declaring the method on controllableSession itself would
+// make every fixture session claim the prompt, since Go decides that
+// statically.
+type launchPromptControllableSession struct {
+	*controllableSession
+	handled bool
+}
+
+func (s *launchPromptControllableSession) OpeningPromptHandled() bool { return s.handled }
 
 // hookToken is the token the daemon generated for this session's hook bridge.
 // A hook is only accepted when it carries it.

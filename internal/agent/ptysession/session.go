@@ -68,11 +68,16 @@ type Session struct {
 	state  agent.State
 	closed bool
 	events chan agent.LifecycleEvent
+	// handledOpeningPrompt records that the caller's Launch already submitted
+	// LaunchOptions.OpeningPrompt to the CLI, for example as a command-line
+	// argument, so the daemon must not type it into the terminal as well.
+	handledOpeningPrompt bool
 }
 
 var (
-	_ agent.Session        = (*Session)(nil)
-	_ agent.ProcessSession = (*Session)(nil)
+	_ agent.Session              = (*Session)(nil)
+	_ agent.ProcessSession       = (*Session)(nil)
+	_ agent.OpeningPromptSession = (*Session)(nil)
 )
 
 func (s *Session) ID() string              { return s.id }
@@ -89,6 +94,22 @@ func (s *Session) State() agent.State {
 // resize) rather than duplicating it here.
 func (s *Session) Process() *pty.Process {
 	return s.process
+}
+
+// MarkOpeningPromptHandled records that the caller's launch already submitted
+// options.OpeningPrompt, so the daemon skips its own prompt delivery.
+func (s *Session) MarkOpeningPromptHandled() {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.handledOpeningPrompt = true
+}
+
+// OpeningPromptHandled reports whether the launch submitted the opening
+// prompt. See MarkOpeningPromptHandled.
+func (s *Session) OpeningPromptHandled() bool {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.handledOpeningPrompt
 }
 
 // Prompt sends text to the agent as if a user typed it, followed by a

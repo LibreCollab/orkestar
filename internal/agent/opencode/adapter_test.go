@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -90,17 +91,42 @@ func newFixtureServer(t *testing.T) (*httptest.Server, *fixtureServer) {
 
 // fixtureExecutable writes a small shell script that behaves enough like an
 // interactive CLI (reads stdin, ignores it, exits when its PTY closes) to
-// exercise interactive mode without depending on a real OpenCode install.
+// exercise interactive mode without depending on a real OpenCode install. It
+// records its own arguments to "<path>.args" so a test can check how the
+// adapter invoked it.
 func fixtureExecutable(t *testing.T) string {
 	t.Helper()
 
 	directory := t.TempDir()
 	path := filepath.Join(directory, "opencode")
-	script := "#!/bin/sh\ncat >/dev/null\n"
+	script := "#!/bin/sh\nprintf '%s\\n' \"$@\" > \"$0.args\"\ncat >/dev/null\n"
 	if err := os.WriteFile(path, []byte(script), 0o755); err != nil {
 		t.Fatalf("write fixture executable: %v", err)
 	}
 	return path
+}
+
+// fixtureArguments returns the arguments the fixture executable was launched
+// with, waiting briefly because the script writes them as it starts.
+func fixtureArguments(t *testing.T, executable string) []string {
+	t.Helper()
+
+	path := executable + ".args"
+	deadline := time.Now().Add(3 * time.Second)
+	for {
+		data, err := os.ReadFile(path)
+		if err == nil {
+			lines := strings.Split(strings.TrimSuffix(string(data), "\n"), "\n")
+			if len(lines) == 1 && lines[0] == "" {
+				return nil
+			}
+			return lines
+		}
+		if time.Now().After(deadline) {
+			t.Fatalf("fixture executable never recorded its arguments: %v", err)
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
 }
 
 func TestAdapterCapabilities(t *testing.T) {
@@ -167,7 +193,8 @@ func TestAdapterInteractiveLaunchPromptAndInterrupt(t *testing.T) {
 func TestAdapterInteractiveAcceptsResume(t *testing.T) {
 	t.Parallel()
 
-	adapter := opencode.New(fixtureExecutable(t), "", nil)
+	executable := fixtureExecutable(t)
+	adapter := opencode.New(executable, "", nil)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	session, err := adapter.Launch(ctx, agent.LaunchOptions{Mode: agent.ModeInteractive, ResumeSessionID: "prior"})
@@ -178,7 +205,67 @@ func TestAdapterInteractiveAcceptsResume(t *testing.T) {
 	if session.NativeSessionID() != "prior" {
 		t.Fatal("resume identity not retained")
 	}
+	if args := fixtureArguments(t, executable); len(args) != 2 || args[0] != "--session" || args[1] != "prior" {
+		t.Fatalf("unexpected launch arguments: %#v", args)
+	}
+}
 
+// The OpenCode TUI creates its session only when a message is submitted, so
+// it cannot signal through hooks before an opening prompt arrives; the prompt
+// must go on the command line instead, and the session must say so, or the
+// daemon would type it in a second time.
+func TestAdapterInteractiveTakesTheOpeningPromptAtLaunch(t *testing.T) {
+	t.Parallel()
+
+	executable := fixtureExecutable(t)
+	adapter := opencode.New(executable, "", nil)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	session, err := adapter.Launch(ctx, agent.LaunchOptions{
+		Mode:          agent.ModeInteractive,
+		Directory:     t.TempDir(),
+		OpeningPrompt: "fix the flaky test",
+	})
+	if err != nil {
+		t.Fatalf("launch: %v", err)
+	}
+	defer session.Close()
+
+	promptSession, ok := session.(agent.OpeningPromptSession)
+	if !ok {
+		t.Fatal("expected the interactive session to report on the opening prompt")
+	}
+	if !promptSession.OpeningPromptHandled() {
+		t.Fatal("a launch with an opening prompt should report it submitted")
+	}
+	if args := fixtureArguments(t, executable); len(args) != 1 || args[0] != "--prompt=fix the flaky test" {
+		t.Fatalf("unexpected launch arguments: %#v", args)
+	}
+}
+
+// A launch with nothing to hand over is reported as such, so the daemon
+// keeps its own delivery behavior for every other interactive adapter.
+func TestAdapterInteractiveWithoutAPromptReportsNothingSubmitted(t *testing.T) {
+	t.Parallel()
+
+	executable := fixtureExecutable(t)
+	adapter := opencode.New(executable, "", nil)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	session, err := adapter.Launch(ctx, agent.LaunchOptions{Mode: agent.ModeInteractive, Directory: t.TempDir()})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer session.Close()
+
+	promptSession, ok := session.(agent.OpeningPromptSession)
+	if !ok || promptSession.OpeningPromptHandled() {
+		t.Fatal("a launch without an opening prompt should not claim one")
+	}
+	if args := fixtureArguments(t, executable); len(args) != 0 {
+		t.Fatalf("unexpected launch arguments: %#v", args)
+	}
 }
 
 func TestAdapterLaunchPromptAndInterrupt(t *testing.T) {

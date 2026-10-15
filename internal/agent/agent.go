@@ -77,6 +77,12 @@ type LaunchOptions struct {
 	Arguments       []string
 	Environment     []string
 	HookCommand     string
+	// OpeningPrompt is the work the agent is being launched to do, when the
+	// adapter can hand it over on the command line. Adapters that cannot (or
+	// cannot in the requested mode) ignore it; the daemon then delivers it
+	// once the session signals it started. A session that did consume it
+	// implements OpeningPromptSession so the prompt is not sent twice.
+	OpeningPrompt string
 }
 
 // LifecycleEvent is a structured signal an adapter emits as the agent moves
@@ -135,6 +141,20 @@ type ProcessSession interface {
 	Session
 	// Process returns the underlying PTY process.
 	Process() *pty.Process
+}
+
+// OpeningPromptSession is an optional extension of Session for adapters whose
+// Launch already submitted LaunchOptions.OpeningPrompt, so the daemon must not
+// deliver it again. The interactive OpenCode TUI is the motivating case: it
+// creates its session only when a message is submitted, so its hooks cannot
+// signal readiness before the opening prompt arrives; taking the prompt as a
+// launch argument breaks that deadlock. Callers type-assert for this after
+// Launch and skip their own delivery when it reports true.
+type OpeningPromptSession interface {
+	Session
+	// OpeningPromptHandled reports whether Launch submitted the opening
+	// prompt. It is false for sessions launched without one.
+	OpeningPromptHandled() bool
 }
 
 // Detector is an optional extension of Adapter for adapters that can infer
