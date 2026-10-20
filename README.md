@@ -64,8 +64,12 @@ shell profile. Set `ORKESTAR_INSTALL_DIR` to choose somewhere else.
 With Homebrew:
 
 ```bash
-brew install martintrifunov/tap/orkestar
+brew install librecollab/tap/orkestar
 ```
+
+If you installed from the older `martintrifunov/tap`, `brew update` moves you to
+`librecollab/tap`. Run `brew trust --formula librecollab/tap/orkestar` once so
+Homebrew will load the formula by its short name for `brew upgrade`.
 
 With [mise](https://mise.jdx.dev), which reads the same GitHub releases:
 

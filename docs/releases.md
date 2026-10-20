@@ -24,7 +24,7 @@ or trigger packaging.
 
 The formula follows [thisyou's formula](https://github.com/martintrifunov/homebrew-tap/blob/main/Formula/thisyou.rb)
 and builds from the tagged source. The tap owns its own updates: `update-orkestar.yml`
-in `martintrifunov/homebrew-tap` reads this repository's latest release, rewrites the
+in `LibreCollab/homebrew-tap` reads this repository's latest release, rewrites the
 formula's `url` and `sha256`, then runs `brew audit --strict`, a source build and
 `brew test` before committing. It runs on a schedule and on manual dispatch, so no
 cross-repository token is needed here. The source checksum can only be computed
@@ -36,16 +36,22 @@ formula written by hand. After seeding or editing the formula directly, verify i
 yourself instead:
 
 ```sh
-brew install martintrifunov/tap/orkestar
-brew test martintrifunov/tap/orkestar
-brew audit --strict martintrifunov/tap/orkestar
+brew install librecollab/tap/orkestar
+brew test librecollab/tap/orkestar
+brew audit --strict librecollab/tap/orkestar
 ```
 
 Once the release and formula are published:
 
 ```sh
-brew install martintrifunov/tap/orkestar
+brew install librecollab/tap/orkestar
 ```
+
+The formula used to live in `martintrifunov/tap`. That tap's `tap_migrations.json`
+sends `orkestar` here, so `brew update` moves existing installs to
+`librecollab/tap`. Homebrew refuses to load a formula by its short name from a tap
+the user has not trusted, so migrated users run
+`brew trust --formula librecollab/tap/orkestar` once.
 
 For Windows, users install with
 `irm https://raw.githubusercontent.com/LibreCollab/orkestar/main/install.ps1 | iex`,
