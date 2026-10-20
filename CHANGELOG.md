@@ -1,5 +1,96 @@
 # Changelog
 
+## 0.6.0
+
+Unattended operation, the operator surface and GitHub sync (M15 to M17), more
+daily-use controls in the interface, and a fix-up pass over 0.5's federation
+and control surface. The repository has moved to
+github.com/LibreCollab/orkestar, and this is the first release under the new
+module path.
+
+Moving to LibreCollab:
+
+- The Go module is now `github.com/LibreCollab/orkestar`. The installers,
+  mise and the Homebrew formula fetch from the new repository.
+- Homebrew installs from `librecollab/tap/orkestar`. The old
+  `martintrifunov/tap` redirects `orkestar` there on `brew update`; migrated
+  users run `brew trust --formula librecollab/tap/orkestar` once so the short
+  name keeps working for `brew upgrade`.
+
+Unattended operation (M15):
+
+- Template tasks marked `auto_start` are launched by the daemon as their
+  dependencies finish. A restart neither doubles nor loses a launch, and a
+  failed launch is recorded on the task rather than retried.
+- Tasks take a `token_budget` and `time_budget_seconds`. Usage is read from
+  the Claude transcript, the Codex rollout and OpenCode's plugin totals;
+  crossing a budget raises attention and records a log artifact, and a `stop`
+  budget interrupts the agent. `agent.explain` reports the limit and the spend.
+- `.orkestar/policy.json`, with a user-level file beneath it, decides
+  permission requests before they reach the inbox. First match wins, a rule
+  that matches everything is refused, decisions are audited, and
+  `policy.check` answers a hypothetical request.
+- `orkestar run` takes one piece of work from start to finish without a
+  terminal: workspace, task or template, agent, wait, and a JSON summary. A
+  cancelled or timed-out run exits non-zero.
+
+Operator surface (M16):
+
+- `search.query` (IPC, CLI, MCP) scans terminal screens and scrollback, tasks,
+  artifacts and templates. `Ctrl+b /` searches from the interface and jumps to
+  the match.
+- `terminal.record` captures a terminal as an asciicast v2 file, capped at
+  8 MiB, and attaches it to a task. `Ctrl+b R` lists recordings and replays one
+  in a pane. A recording is terminal text on disk, so it can hold secrets.
+- The daemon posts notifications when no client is attached. On Linux a
+  notification can focus the pane it is about; macOS notifications have no
+  buttons.
+
+GitHub (M17):
+
+- `orkestar task import` creates a task from an issue, and `orkestar task pr`
+  opens a pull request from a done task's branch and records its URL. The `gh`
+  CLI handles authentication; no token is stored.
+
+Interface:
+
+- `Ctrl+b l` saves, applies and deletes named, portable pane layouts.
+- `Ctrl+b m` then an arrow moves the focused pane beside a neighbour, changing
+  the split shape; `Ctrl+b p` still swaps panes in place.
+- `T` on the board applies a workflow template; `Ctrl+D` in the task prompt
+  edits dependencies. `Tab` now moves between prompt fields, and auto-review is
+  toggled with `Ctrl+R`.
+- Agents on other enabled machines can be interrupted, stopped, resumed and
+  explained from their sidebar rows, and `Ctrl+b ,` then `m` manages saved
+  machines.
+- `E` explains an agent's state from the sidebar, and `r` in settings reloads
+  agent manifests edited on disk.
+- Sidebar rows are configurable with `sidebar` templates in settings.
+- An agent that stays in one working state past `ORKESTAR_AGENT_WATCHDOG`
+  (30 minutes by default) is flagged the way a crash is.
+
+Agents and daemon:
+
+- The opening prompt is passed on the command line to Claude Code, Codex and
+  OpenCode instead of being typed in after launch. This stops OpenCode tasks
+  waiting out a 30-second fallback, and stops a Claude Code trust dialog from
+  swallowing the prompt and exiting.
+- A metadata save that fails keeps retrying, and `orkestar status` says
+  metadata is not durable until it succeeds.
+- The interface refuses to start against a running daemon with an
+  incompatible protocol, saying the two cannot talk until one side is
+  upgraded, instead of failing on every call.
+- Federation: machines are polled and refreshed concurrently, reconnect
+  backoff is capped at a minute, a moved host is redialled, a
+  protocol-mismatched machine is taken offline, and the machine catalog is
+  locked across writers.
+- Fixes: auto-resumed agents are persisted; waits are released when clients
+  disconnect and recheck output when they end; stopped terminals reject input;
+  `terminal send` takes text after `--` literally; blank detection rules,
+  invalid read arguments and empty or duplicate adapter reloads are rejected;
+  pane layouts are written atomically; liveness and resumability are reported
+  honestly.
+
 ## 0.5.1
 
 A bug-fix release over 0.5.0. Four review passes over the new surface, its

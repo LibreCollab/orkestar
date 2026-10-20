@@ -658,6 +658,13 @@ one actually is, and what is still missing:
 
 M4 still blocks M7, and nothing here changes that.
 
+**0.6.0** shipped these on 2026-10-20 with the rest of M12 and M13's interface work
+(remote agent rows, portable layouts, pane moves, sidebar templates) and a
+fix-up pass over federation and the control surface; see the changelog. It is
+also the first release from github.com/LibreCollab/orkestar. The caveats
+above stand: GitHub sync is verified against a fake `gh`, and the remote half
+against in-process daemons, not ssh.
+
 ## Later possibilities
 
 - Plugin distribution. Deliberately not before there are users: designing
