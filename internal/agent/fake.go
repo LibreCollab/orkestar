@@ -105,7 +105,9 @@ func (s *fakeSession) emit(state State, reason string) {
 		return
 	}
 	s.state = state
-	s.mu.Unlock()
+	// Hold the lock through the send so Close cannot close the channel
+	// between the check above and the send below.
+	defer s.mu.Unlock()
 
 	event := LifecycleEvent{State: state, Reason: reason, Timestamp: time.Now().UTC()}
 	select {
