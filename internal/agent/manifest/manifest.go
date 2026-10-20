@@ -16,8 +16,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/ptysession"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/ptysession"
 )
 
 // Resume describes how a CLI resumes a native session. Arguments is a template

@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
 )
 
 func Ensure(ctx context.Context, paths runtimepath.Paths) error {

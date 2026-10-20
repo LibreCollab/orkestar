@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	tea "charm.land/bubbletea/v2"
+	"github.com/LibreCollab/orkestar/internal/files"
 	"github.com/charmbracelet/x/ansi"
-	"github.com/martintrifunov/orkestar/internal/files"
 )
 
 func TestDocumentScrollingDoesNotBounceAtEdges(t *testing.T) {

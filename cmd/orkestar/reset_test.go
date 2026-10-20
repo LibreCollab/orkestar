@@ -10,11 +10,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/daemonclient"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
-	"github.com/martintrifunov/orkestar/internal/store"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/daemonclient"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/store"
 )
 
 // The legacy fixture drops its socket before a delayed final persistence write,

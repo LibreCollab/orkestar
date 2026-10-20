@@ -13,9 +13,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/pty"
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/pty"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 type Terminal struct {

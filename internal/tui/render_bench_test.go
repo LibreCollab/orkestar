@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 // staticScreen stands in for an attached pane so the benchmark measures the

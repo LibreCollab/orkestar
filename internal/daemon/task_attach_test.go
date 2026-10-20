@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // task.attach is the subscription counterpart to task.wait: a waiter follows

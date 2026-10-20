@@ -45,7 +45,7 @@ if not args.formula_only:
     (dist / 'SHA256SUMS').write_text(''.join(
         f'{hashlib.sha256(a.read_bytes()).hexdigest()}  {a.name}\n' for a in archives))
 else:
-    url = f'https://github.com/martintrifunov/orkestar/archive/refs/tags/v{version}.tar.gz'
+    url = f'https://github.com/LibreCollab/orkestar/archive/refs/tags/v{version}.tar.gz'
     with urllib.request.urlopen(url, timeout=60) as response:
         digest = hashlib.sha256(response.read()).hexdigest()
     template = Path('packaging/homebrew/orkestar.rb.in').read_text()

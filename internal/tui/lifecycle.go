@@ -6,7 +6,7 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 // lifecycleMsg reports a stop, removal or interrupt. removedTerminal lets the

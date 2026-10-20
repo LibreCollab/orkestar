@@ -3,7 +3,7 @@ package tui
 import (
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/martintrifunov/orkestar/internal/notify"
+	"github.com/LibreCollab/orkestar/internal/notify"
 )
 
 // The bell reaches someone sitting in front of the terminal. A desktop

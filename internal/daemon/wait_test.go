@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // waitCall runs a wait over IPC in the background, so a test can prove it was

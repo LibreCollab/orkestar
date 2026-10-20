@@ -1,8 +1,8 @@
 package daemon
 
 import (
-	"github.com/martintrifunov/orkestar/internal/notify"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/notify"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // SetNotifier overrides how the daemon posts desktop notifications. Tests use

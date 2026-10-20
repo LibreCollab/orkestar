@@ -8,8 +8,8 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // writeTemplate puts a template where the daemon reads it: inside the

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
 )
 
 // The default session keeps the path it always had, so an existing daemon and

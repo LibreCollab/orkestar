@@ -6,8 +6,8 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // taskModel is a sidebar with two tasks, an agent on each, and panes open for

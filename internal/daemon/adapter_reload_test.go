@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 )
 
 // A reload rebuilds the whole adapter set, so a manifest that was removed or

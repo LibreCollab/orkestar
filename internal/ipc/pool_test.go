@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 // countingServer answers requests the way the daemon does — many per

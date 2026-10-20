@@ -1,7 +1,7 @@
 #!/bin/sh
 # Install the latest orkestar release on macOS or Linux.
 #
-#   curl -fsSL https://raw.githubusercontent.com/martintrifunov/orkestar/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/LibreCollab/orkestar/main/install.sh | sh
 #
 # A Homebrew tap covers people who use Homebrew. This is for everyone else,
 # which is most people installing a terminal tool, and it is the first step
@@ -12,7 +12,7 @@
 
 set -eu
 
-REPOSITORY="martintrifunov/orkestar"
+REPOSITORY="LibreCollab/orkestar"
 RELEASE_BASE="https://github.com/${REPOSITORY}/releases/latest/download"
 
 fail() {

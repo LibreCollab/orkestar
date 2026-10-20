@@ -13,10 +13,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/machine"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/machine"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // protocolMismatch reports whether a ping reply comes from a daemon this

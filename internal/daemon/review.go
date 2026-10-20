@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/git"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/git"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // maxReviewDiffChars bounds how much diff text is sent to the reviewer

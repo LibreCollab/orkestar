@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // templateDirectory is where a workspace keeps its templates, under the

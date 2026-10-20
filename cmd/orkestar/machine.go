@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/federation"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/machine"
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/federation"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/machine"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
 )
 
 var errMachineUsage = errors.New(`usage:

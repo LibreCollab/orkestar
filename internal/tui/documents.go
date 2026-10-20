@@ -11,8 +11,8 @@ import (
 	"time"
 
 	tea "charm.land/bubbletea/v2"
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/files"
 )
 
 type editorSettings struct {

@@ -12,11 +12,11 @@ import (
 
 	sdk "github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	orkestarmcp "github.com/martintrifunov/orkestar/internal/mcp"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	orkestarmcp "github.com/LibreCollab/orkestar/internal/mcp"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 func startTestDaemon(t *testing.T) *ipc.Client {

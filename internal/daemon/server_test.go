@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 func TestServerPingAndWorkspaceLifecycle(t *testing.T) {

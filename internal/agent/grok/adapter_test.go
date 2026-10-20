@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/grok"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/grok"
 )
 
 // fixtureExecutable stands in for grok, which is not installed here

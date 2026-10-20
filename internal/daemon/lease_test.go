@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 func TestResourceLeaseAcquireAndRelease(t *testing.T) {

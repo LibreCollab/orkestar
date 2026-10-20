@@ -3,7 +3,7 @@ package terminal_test
 import (
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 func TestBufferKeepsNewestBytes(t *testing.T) {

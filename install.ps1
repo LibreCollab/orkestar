@@ -43,7 +43,7 @@ if ([string]::IsNullOrWhiteSpace($InstallDir)) {
     }
 }
 
-$ReleaseBase = "https://github.com/martintrifunov/orkestar/releases/latest/download"
+$ReleaseBase = "https://github.com/LibreCollab/orkestar/releases/latest/download"
 $TemporaryDirectory = Join-Path ([System.IO.Path]::GetTempPath()) ("orkestar-install-" + [System.Guid]::NewGuid().ToString("N"))
 $ArchivePath = Join-Path $TemporaryDirectory $ArchiveName
 $ChecksumPath = Join-Path $TemporaryDirectory "SHA256SUMS"

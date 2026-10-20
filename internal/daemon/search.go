@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // SearchResult is one match from a global search. Kind says where it came

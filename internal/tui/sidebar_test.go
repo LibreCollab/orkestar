@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 func TestSidebarRowSubstitution(t *testing.T) {

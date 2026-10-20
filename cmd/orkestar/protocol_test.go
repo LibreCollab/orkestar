@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 // Compatibility is the protocol generation, not the build version: two builds

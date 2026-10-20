@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent/claude"
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/agent/claude"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 // fixtureAgentExecutable writes a shell script that echoes back whatever it

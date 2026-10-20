@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/ptysession"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/ptysession"
 )
 
 // The fixture is written once, before any test forks a child. Writing an

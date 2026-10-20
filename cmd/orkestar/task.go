@@ -13,11 +13,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
-	"github.com/martintrifunov/orkestar/internal/usage"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/usage"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // runTemplate handles the template verbs, which sit beside tasks because that

@@ -8,13 +8,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent/claude"
-	"github.com/martintrifunov/orkestar/internal/agent/codex"
-	"github.com/martintrifunov/orkestar/internal/agent/opencode"
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/store"
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/agent/claude"
+	"github.com/LibreCollab/orkestar/internal/agent/codex"
+	"github.com/LibreCollab/orkestar/internal/agent/opencode"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/store"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 func TestMain(m *testing.M) {

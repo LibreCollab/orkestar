@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 func TestAcquireExclusiveBlocksOthers(t *testing.T) {

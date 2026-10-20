@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // sendRawWait writes one wait request on its own connection and returns the

@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/cursor"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/cursor"
 )
 
 // fixtureExecutable stands in for cursor-agent, which is not installed here

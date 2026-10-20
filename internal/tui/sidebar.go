@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
-	"github.com/martintrifunov/orkestar/internal/usage"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/usage"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // Sidebar rows were hard-coded, so a user who cared about the branch rather

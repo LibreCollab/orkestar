@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/daemon"
 )
 
 func TestTerminalRecordingWritesAnAsciicast(t *testing.T) {

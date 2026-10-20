@@ -1,4 +1,4 @@
-module github.com/martintrifunov/orkestar
+module github.com/LibreCollab/orkestar
 
 go 1.27.0
 

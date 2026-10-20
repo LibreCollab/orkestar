@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/store"
+	"github.com/LibreCollab/orkestar/internal/store"
 )
 
 // paneHistoryFile holds the bounded text of terminals across a restart. It

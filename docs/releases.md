@@ -48,7 +48,7 @@ brew install martintrifunov/tap/orkestar
 ```
 
 For Windows, users install with
-`irm https://raw.githubusercontent.com/martintrifunov/orkestar/main/install.ps1 | iex`,
+`irm https://raw.githubusercontent.com/LibreCollab/orkestar/main/install.ps1 | iex`,
 matching thisyou. The script is served from `main`, not from a tag, so it always
 resolves `releases/latest/download`; keep it working for the newest release. It
 selects amd64/arm64, verifies SHA-256, and installs without admin rights. `build.ps1 -Task Build|Test|Install|Uninstall` supports source development.

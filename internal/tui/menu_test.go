@@ -7,7 +7,7 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"github.com/charmbracelet/x/ansi"
 
-	"github.com/martintrifunov/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/files"
 )
 
 // Right-clicking a pane is how someone who does not read help lines finds out

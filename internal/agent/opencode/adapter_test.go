@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/opencode"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/opencode"
 )
 
 // fixtureServer is a minimal stand-in for `opencode serve` covering the

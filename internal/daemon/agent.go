@@ -10,10 +10,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/usage"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/usage"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // Agent is the daemon's view of a running or recently-stopped agent

@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/pty"
+	"github.com/LibreCollab/orkestar/internal/pty"
 )
 
 // State is a coarse agent lifecycle state, as described in

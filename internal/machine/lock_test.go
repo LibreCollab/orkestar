@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/machine"
+	"github.com/LibreCollab/orkestar/internal/machine"
 )
 
 // A second acquirer waits while the lock is held and proceeds once it is

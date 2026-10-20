@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 func TestWindowsPowerShellReconnectAndReset(t *testing.T) {

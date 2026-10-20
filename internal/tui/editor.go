@@ -7,9 +7,9 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
+	"github.com/LibreCollab/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/syntax"
 	"github.com/charmbracelet/x/ansi"
-	"github.com/martintrifunov/orkestar/internal/files"
-	"github.com/martintrifunov/orkestar/internal/syntax"
 )
 
 // syntaxStyles is built once from the fixed palette so rendering a line does

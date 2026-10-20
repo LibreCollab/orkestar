@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/policy"
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/policy"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
 )
 
 // PolicyAuditEntry records one permission request a policy decided, so "why

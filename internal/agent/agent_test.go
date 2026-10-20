@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 )
 
 func TestFakeAdapterLaunchAndPrompt(t *testing.T) {

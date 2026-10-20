@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/machine"
+	"github.com/LibreCollab/orkestar/internal/machine"
 )
 
 func TestCatalogAddRenameAndPersist(t *testing.T) {

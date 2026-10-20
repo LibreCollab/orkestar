@@ -5,8 +5,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/ptysession"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/ptysession"
 )
 
 // Adapter launches cursor-agent as an interactive session.

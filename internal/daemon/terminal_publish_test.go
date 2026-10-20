@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 // buildLog is what sustained output actually looks like: many small writes,

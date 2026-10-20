@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // autoStartTimeout bounds a single automatic launch, the way a request's

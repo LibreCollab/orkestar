@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 )
 
 // A manifest edited on disk only took effect after `orkestar agent reload`.

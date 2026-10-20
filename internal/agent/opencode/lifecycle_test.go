@@ -2,7 +2,7 @@ package opencode
 
 import (
 	"context"
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 	"sync"
 	"testing"
 )

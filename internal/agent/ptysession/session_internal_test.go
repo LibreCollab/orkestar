@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 )
 
 // TestWatchExitContainsAPanicAndClosesEvents pins the goroutine backstop: a

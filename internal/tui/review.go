@@ -11,7 +11,7 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
-	"github.com/martintrifunov/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/files"
 )
 
 type reviewFile struct{ path, status string }

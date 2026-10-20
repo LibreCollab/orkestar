@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/agent/hooks"
-	"github.com/martintrifunov/orkestar/internal/agent/ptysession"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent/hooks"
+	"github.com/LibreCollab/orkestar/internal/agent/ptysession"
 )
 
 type Adapter struct{ executable string }

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 // firstRow is what a pane would show for the top line of the screen.

@@ -12,9 +12,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/policy"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/policy"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 type hookPermission struct {

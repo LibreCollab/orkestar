@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	tea "charm.land/bubbletea/v2"
+	"github.com/LibreCollab/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/syntax"
 	"github.com/charmbracelet/x/ansi"
-	"github.com/martintrifunov/orkestar/internal/files"
-	"github.com/martintrifunov/orkestar/internal/syntax"
 )
 
 // lex runs the editor's background highlight synchronously.

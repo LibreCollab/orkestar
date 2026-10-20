@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/machine"
-	"github.com/martintrifunov/orkestar/internal/runtimepath"
+	"github.com/LibreCollab/orkestar/internal/machine"
+	"github.com/LibreCollab/orkestar/internal/runtimepath"
 )
 
 func TestTerminalReadRejectsNegativeLines(t *testing.T) {

@@ -3,7 +3,7 @@ package workflow_test
 import (
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 func TestCreateRejectsMissingDependency(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 func TestReviewRejectsAmbiguousVerdicts(t *testing.T) {

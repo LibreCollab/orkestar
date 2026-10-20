@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/store"
+	"github.com/LibreCollab/orkestar/internal/store"
 )
 
 // A metadata row the daemon cannot read must not brick it: the daemon starts

@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/usage"
+	"github.com/LibreCollab/orkestar/internal/usage"
 )
 
 func write(t *testing.T, path, body string) {

@@ -6,7 +6,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // maxLeaseDurationMS is the largest millisecond value that still fits in a

@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // maxRecordingBytes caps one recording. Terminal output is unbounded, so a

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/git"
+	"github.com/LibreCollab/orkestar/internal/git"
 )
 
 func initRepo(t *testing.T) string {

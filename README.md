@@ -16,11 +16,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/martintrifunov/orkestar/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/martintrifunov/orkestar/ci.yml?style=flat-square&label=build&color=D7A84B" alt="Build status"></a>
+  <a href="https://github.com/LibreCollab/orkestar/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/LibreCollab/orkestar/ci.yml?style=flat-square&label=build&color=D7A84B" alt="Build status"></a>
   <a href="https://go.dev/"><img src="https://img.shields.io/badge/Go-1.27-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Go 1.27"></a>
   <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-D7A84B?style=flat-square" alt="macOS, Linux and Windows">
   <img src="https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20OpenCode-D7A84B?style=flat-square" alt="Supported agents">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/martintrifunov/orkestar?style=flat-square&color=D7A84B" alt="MIT license"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/LibreCollab/orkestar?style=flat-square&color=D7A84B" alt="MIT license"></a>
 </p>
 
 Orkestar is a background daemon that owns your agent sessions, and a terminal UI
@@ -53,7 +53,7 @@ No account, no server, no browser. One static binary.
 On macOS or Linux:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/martintrifunov/orkestar/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/LibreCollab/orkestar/main/install.sh | sh
 ```
 
 The installer verifies the release checksum before unpacking anything, installs
@@ -70,14 +70,14 @@ brew install martintrifunov/tap/orkestar
 With [mise](https://mise.jdx.dev), which reads the same GitHub releases:
 
 ```bash
-mise use -g ubi:martintrifunov/orkestar
+mise use -g ubi:LibreCollab/orkestar
 ```
 
 Install the latest x64 or ARM64 release from PowerShell, on Windows 10 1809+ or
 Windows 11:
 
 ```powershell
-irm https://raw.githubusercontent.com/martintrifunov/orkestar/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/LibreCollab/orkestar/main/install.ps1 | iex
 ```
 
 The installer verifies the release checksum, places `orkestar.exe` in
@@ -94,7 +94,7 @@ contract has been verified. See [validation](docs/validation.md).
 Build from source with Go 1.27 or newer on macOS, Linux or Windows:
 
 ```bash
-git clone https://github.com/martintrifunov/orkestar
+git clone https://github.com/LibreCollab/orkestar
 cd orkestar
 go build -o ./orkestar ./cmd/orkestar
 ```

@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 )
 
 // An attach to an agent that has already ended must return instead of waiting

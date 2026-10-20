@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/martintrifunov/orkestar/internal/policy"
+	"github.com/LibreCollab/orkestar/internal/policy"
 )
 
 func parse(t *testing.T, body string) policy.Policy {

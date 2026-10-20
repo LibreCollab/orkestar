@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 func startPaneHistoryDaemon(t *testing.T, socket string) (*ipc.Client, func()) {

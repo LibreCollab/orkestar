@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/agent"
 )
 
 // DefaultAgentWatchdog is how long an agent session may stay in a working

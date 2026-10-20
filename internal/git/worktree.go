@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/martintrifunov/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/files"
 	"os/exec"
 	"strconv"
 	"strings"

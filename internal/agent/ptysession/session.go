@@ -17,8 +17,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/agent"
-	"github.com/martintrifunov/orkestar/internal/pty"
+	"github.com/LibreCollab/orkestar/internal/agent"
+	"github.com/LibreCollab/orkestar/internal/pty"
 )
 
 // Launch resolves executable on PATH, starts it in a PTY per options, and

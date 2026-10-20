@@ -7,7 +7,7 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/daemon"
 )
 
 // MachineView is another machine's board as last polled. Only agents are merged

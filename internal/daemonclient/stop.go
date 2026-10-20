@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 // Stop waits for the daemon process to exit, not merely for its listener to

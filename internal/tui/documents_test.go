@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	tea "charm.land/bubbletea/v2"
-	"github.com/martintrifunov/orkestar/internal/files"
+	"github.com/LibreCollab/orkestar/internal/files"
 )
 
 func TestEditorSelectionUndoSaveAndConflict(t *testing.T) {

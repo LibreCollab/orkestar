@@ -8,7 +8,7 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/daemon"
 )
 
 // explainMsg carries the daemon's account of why an agent is in the state the

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	tea "charm.land/bubbletea/v2"
-	"github.com/martintrifunov/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/daemon"
 )
 
 // searchResultsMsg carries the answers to one query. machineID guards the

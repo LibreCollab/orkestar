@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/usage"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/usage"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // BudgetStatus is how close an agent's task is to the limit it was given. It

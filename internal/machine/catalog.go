@@ -16,7 +16,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 // Machine is one saved ssh target.

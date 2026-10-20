@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
-	"github.com/martintrifunov/orkestar/internal/terminal"
+	"github.com/LibreCollab/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/terminal"
 )
 
 func TestDaemonAnswersQueriesWithoutClientAndArbitratesViewers(t *testing.T) {

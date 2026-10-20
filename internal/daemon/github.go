@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/martintrifunov/orkestar/internal/github"
-	"github.com/martintrifunov/orkestar/internal/workflow"
+	"github.com/LibreCollab/orkestar/internal/github"
+	"github.com/LibreCollab/orkestar/internal/workflow"
 )
 
 // GitHubImport is what importing an issue produced: the task and the issue it

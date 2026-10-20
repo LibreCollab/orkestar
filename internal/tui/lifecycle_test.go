@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martintrifunov/orkestar/internal/daemon"
+	"github.com/LibreCollab/orkestar/internal/daemon"
 )
 
 // Nothing could stop a session or clear a finished one, so the list grew

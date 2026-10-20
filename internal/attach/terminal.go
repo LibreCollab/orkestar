@@ -11,7 +11,7 @@ import (
 
 	"github.com/charmbracelet/x/term"
 
-	"github.com/martintrifunov/orkestar/internal/ipc"
+	"github.com/LibreCollab/orkestar/internal/ipc"
 )
 
 const detachPrefix = byte(0x02)
